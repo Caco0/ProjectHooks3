@@ -28,7 +28,7 @@ function App() {
     <div>
       <h1>
         <a href="https://overreacted.io/making-setinterval-declarative-with-react-hooks/">
-          Making setInterval Declarative with React Hooks
+          Making setInterval Declarative with React Hooks (Dan Abramov)
         </a>
       </h1>
       <br />
