@@ -31,9 +31,6 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-  a:nth-of-type(2) .reverse {
-    animation: logo-spin-reverse infinite 20s linear;
-  }
 }
 
 .card {
@@ -42,12 +39,4 @@
 
 .read-the-docs {
   color: #888;
-}
-@keyframes logo-spin-reverse {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
 }
