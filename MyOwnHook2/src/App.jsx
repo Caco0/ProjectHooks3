@@ -29,15 +29,22 @@ const useFetch = (url, options) => {
 
   useEffect(() => {
     let wait = false;
-    console.log('EFFECT', new Date().toLocaleDateString());
-    console.log(optionsRef.current.headers);
+
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    // console.log('EFFECT', new Date().toLocaleDateString());
+    // console.log(optionsRef.current.headers);
     setLoading(true);
 
     const fetchData = async () => {
       await new Promise((r) => setTimeout(r, 1000));
 
       try {
-        const response = await fetch(urlRef.current, optionsRef.current);
+        const response = await fetch(urlRef.current, {
+          signal,
+          ...optionsRef.current,
+        });
         const jsonResult = await response.json();
 
         if (!wait) {
@@ -48,12 +55,13 @@ const useFetch = (url, options) => {
         if (!wait) {
           setLoading(false);
         }
-        throw e;
+        console.log('My ERROR:', e.message);
       }
     };
     fetchData();
     return () => {
       wait = true;
+      controller.abort;
     };
   }, [shouldLoad]);
 
@@ -70,10 +78,6 @@ function App() {
       },
     }
   );
-
-  useEffect(() => {
-    console.log('ID do Post', postId);
-  }, [postId]);
 
   if (loading) {
     return (
